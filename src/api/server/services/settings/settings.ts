@@ -153,7 +153,7 @@ class SettingsService {
     }
 
     if (data.tax_included !== undefined) {
-      settings.tax_included = parse.getBooleanIfValid(data.tax_included, false)
+      settings.tax_included = parse.getBooleanIfValid(data.tax_included)
     }
 
     if (data.tax_rate !== undefined) {
