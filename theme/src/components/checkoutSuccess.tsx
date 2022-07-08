@@ -123,12 +123,20 @@ const CheckoutSuccess = ({
         <hr />
 
         <div className="columns" style={{ marginBottom: "3rem" }}>
+
+
           <div className="column is-6">
+
             <b>{text.shipping}</b>
+
+            
+			<ShippingFields order={order} shippingMethod={shippingMethod} />
+			<CityField order={order} checkoutFields={checkoutFields} />														   
             <MobileField order={order} checkoutFields={checkoutFields} />
-            <CityField order={order} checkoutFields={checkoutFields} />
-            <ShippingFields order={order} shippingMethod={shippingMethod} />
+																		 
+
             <CommentsField order={order} checkoutFields={checkoutFields} />
+
           </div>
 
           <div className="column is-6">
@@ -136,6 +144,8 @@ const CheckoutSuccess = ({
             <br />
             <b>{text.shippingMethod}</b>: {order.shipping_method}
             <br />
+			<b>{text.pay}</b> {}
+            <br />									  
             <b>{text.paymentMethod}</b>: {order.payment_method}
             <br />
           </div>
@@ -164,12 +174,22 @@ const CheckoutSuccess = ({
               <span>{text.subtotal}:</span>
               <span>{helper.formatCurrency(order.subtotal, settings)}</span>
             </div>
+
             <div>
               <span>{text.shipping}:</span>
               <span>
                 {helper.formatCurrency(order.shipping_total, settings)}
               </span>
             </div>
+            {order.tax_total > 0 && (
+              <div>
+                <b>{text.included_tax}:</b>
+					
+                <b>{helper.formatCurrency(order.tax_total, settings)}</b>
+					 
+              </div>
+            )}
+
             <div>
               <b>{text.grandTotal}:</b>
               <b>{helper.formatCurrency(order.grand_total, settings)}</b>
