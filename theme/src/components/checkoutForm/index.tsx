@@ -65,18 +65,6 @@ const CheckoutForm: FC<Props> = props => {
     setStep(2)
   }
 
-  const handleShippingMethodSave = shippingMethodId => {
-    updateCart(
-      {
-        payment_method_id: null,
-        shipping_method_id: shippingMethodId,
-      },
-      cart => {
-        loadPaymentMethods()
-      }
-    )
-  }
-
   const isShowPaymentForm = () => {
     const { payment_method_gateway } = state.cart
     const paymentGatewayExists =
@@ -157,7 +145,16 @@ const CheckoutForm: FC<Props> = props => {
           checkoutFields={checkoutFields}
           onEdit={() => setStep(1)}
           onSubmit={handleContactsSubmit}
-          saveShippingMethod={handleShippingMethodSave}
+          saveShippingMethod={shippingMethodID => {
+            updateCart(
+              {
+                shipping_method_id: shippingMethodID,
+              },
+              cart => {
+                loadPaymentMethods()
+              }
+            )
+          }}
           savePaymentMethod={paymentMethodID =>
             updateCart({
               payment_method_id: paymentMethodID,
