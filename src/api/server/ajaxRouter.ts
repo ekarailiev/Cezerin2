@@ -29,19 +29,19 @@ const PRODUCTS_CACHE_CONTROL = "public, max-age=60"
 const PRODUCT_DETAILS_CACHE_CONTROL = "public, max-age=60"
 
 interface cookieOptions {
-  maxAge: number
+  
   httpOnly: true
   signed: true
   secure: boolean
-  sameSite: "strict"
+  sameSite: "lax"
 }
 
 const getCartCookieOptions = (isHttps: boolean): cookieOptions => ({
-  maxAge: 24 * 60 * 60 * 1000, // 24 hours
+  // maxAge: 24 * 60 * 60 * 1000, // 24 hours
   httpOnly: true,
   signed: true,
-  secure: isHttps,
-  sameSite: "strict",
+  secure: true,
+  sameSite: "lax",
 })
 
 const getIP = req => {
