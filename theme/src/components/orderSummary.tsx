@@ -106,10 +106,6 @@ const OrderSummary = props => {
           <div className="column is-5 has-text-right price">
             {helper.formatCurrency(cart.shipping_total, settings)}
           </div>
-          <div className="column is-7">{text.included_tax}</div>
-          <div className="column is-5 has-text-right price">
-            {helper.formatCurrency(cart.tax_total, settings)}
-          </div>
           {cart.discount_total > 0 && (
           <div className="column is-7">{text.discount}</div>
           )}
@@ -118,7 +114,14 @@ const OrderSummary = props => {
               {helper.formatCurrency(cart.discount_total, settings)}
             </div>
           )}
-
+          {cart.tax_total > 0 && (
+            <div className="column is-7">{text.included_tax}</div>
+          )}
+          {cart.tax_total > 0 && (
+            <div className="column is-5 has-text-right price">
+              {helper.formatCurrency(cart.tax_total, settings)}
+            </div>
+          )}
           <div className="column is-12">
             <hr className="separator" />
           </div>
