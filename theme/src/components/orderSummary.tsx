@@ -16,7 +16,7 @@ const SummaryItem = ({ settings, item, updateCartItemQuantity }) => {
     ? themeSettings.maxCartItemQty
     : item.stock_quantity
 
-  for (let i = 0; i <= maxQty; i++) {
+  for (let i = 1; i <= maxQty; i++) {
     const optionText = i === 0 ? text.remove : i
     qtyOptions.push(
       <option key={i} value={i}>
@@ -50,7 +50,7 @@ const SummaryItem = ({ settings, item, updateCartItemQuantity }) => {
           <span>{text.qty}:</span>
           <span className="select is-small">
             <select
-              onChange={e => {
+              onChange={(e) => {
                 updateCartItemQuantity(item.id, e.target.value)
               }}
               value={item.quantity}
@@ -70,13 +70,13 @@ const SummaryItem = ({ settings, item, updateCartItemQuantity }) => {
 SummaryItem.propTypes = {
   settings: PropTypes.shape({}).isRequired,
   item: PropTypes.shape({}).isRequired,
-  updateCartItemQuantity: PropTypes.func.isRequired,
+  updateCartItemQuantity: PropTypes.func.isRequired
 }
 
 const OrderSummary = props => {
   const {
     updateCartItemQuantity,
-    state: { cart, settings },
+    state: { cart, settings }
   } = props
 
   if (cart && cart.items && cart.items.length > 0) {
@@ -106,9 +106,12 @@ const OrderSummary = props => {
           <div className="column is-5 has-text-right price">
             {helper.formatCurrency(cart.shipping_total, settings)}
           </div>
-
+          <div className="column is-7">{text.included_tax}</div>
+          <div className="column is-5 has-text-right price">
+            {helper.formatCurrency(cart.tax_total, settings)}
+          </div>
           {cart.discount_total > 0 && (
-            <div className="column is-7">{text.discount}</div>
+          <div className="column is-7">{text.discount}</div>
           )}
           {cart.discount_total > 0 && (
             <div className="column is-5 has-text-right price">
@@ -131,11 +134,11 @@ const OrderSummary = props => {
 }
 
 OrderSummary.propTypes = {
-  updateCartItemQuantiry: PropTypes.func.isRequired,
+  updateCartItemQuantity: PropTypes.func.isRequired,
   state: PropTypes.shape({
     cart: PropTypes.shape({}),
-    settings: PropTypes.shape({}).isRequired,
-  }).isRequired,
+    settings: PropTypes.shape({}).isRequired
+  }).isRequired
 }
 
 export default OrderSummary
