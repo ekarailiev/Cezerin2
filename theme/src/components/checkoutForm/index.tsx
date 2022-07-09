@@ -145,16 +145,15 @@ const CheckoutForm: FC<Props> = props => {
           checkoutFields={checkoutFields}
           onEdit={() => setStep(1)}
           onSubmit={handleContactsSubmit}
-          saveShippingMethod={shippingMethodID => {
-            updateCart(
-              {
-                shipping_method_id: shippingMethodID,
-              },
+          saveShippingMethod={shippingMethodID =>
+            updateCart({
+              shipping_method_id: shippingMethodID,
+            },
               cart => {
                 loadPaymentMethods()
               }
             )
-          }}
+          }
           savePaymentMethod={paymentMethodID =>
             updateCart({
               payment_method_id: paymentMethodID,
