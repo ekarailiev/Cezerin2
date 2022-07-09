@@ -653,7 +653,7 @@ class OrdersService {
         })
       }
 
-      const tax_total = sum_items_tax_total + order.shipping_tax
+      const tax_total = (sum_items_tax_total + order.shipping_tax).toFixed(2)
       const shipping_total = order.shipping_price - order.shipping_discount
       const discount_total = sum_items_discount_total + sum_discounts_amount
       const grand_total =
@@ -662,13 +662,14 @@ class OrdersService {
         tax_included_total -
         discount_total
 
-      order.weight_total = sum_items_weight
-      order.discount_total = discount_total // sum(items.discount_total)+sum(discounts.amount)
-      order.subtotal = sum_items_price_total // sum(items.price_total)
-      order.tax_included_total = tax_included_total // if(item_tax_included, 0, item_tax) + if(shipment_tax_included, 0, shipping_tax)
-      order.tax_total = tax_total // item_tax + shipping_tax
-      order.shipping_total = shipping_total // shipping_price-shipping_discount
-      order.grand_total = grand_total // subtotal + shipping_total + tax_included_total - (discount_total)
+      order.weight_total = Number(sum_items_weight).toFixed(2)
+      order.discount_total = Number(discount_total).toFixed(2) // sum(items.discount_total)+sum(discounts.amount)
+      order.subtotal = Number(sum_items_price_total).toFixed(2) // sum(items.price_total)
+      order.tax_included_total = Number(tax_included_total).toFixed(2) // if(item_tax_included, 0, item_tax) + if(shipment_tax_included, 0, shipping_tax)
+      order.tax_total = Number(tax_total).toFixed(2) // item_tax + shipping_tax
+      order.shipping_total = Number(shipping_total).toFixed(2) // shipping_price-shipping_discount
+      order.grand_total = Number(grand_total).toFixed(2) // subtotal + shipping_total + tax_included_total - (discount_total)
+
     }
 
     return order
